@@ -1,0 +1,12 @@
+tqdm
+hypothesis
+rtree
+lxml
+pyct
+numpy
+matplotlib
+OpenVisus
+panel
+pandas
+itkwidgets
+bokeh
