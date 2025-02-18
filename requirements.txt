@@ -10,3 +10,4 @@ panel
 pandas
 itkwidgets
 bokeh
+openvisuspy
