@@ -1,4 +1,5 @@
-FROM python:3.11
+ARG BASE_IMAGE_TAG=latest
+FROM ghcr.io/pyvista/pyvista:$BASE_IMAGE_TAG
 
 COPY . ${HOME}
 WORKDIR ${HOME}
