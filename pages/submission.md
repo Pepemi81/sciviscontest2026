@@ -13,6 +13,7 @@ sectionid: submission
         <li>A 2-page PDF describing your visualization and analysis techniques. Focus on the techniques you used and results you obtained. Do not waste space on background information or data descriptions. Please follow the formatting guidelines for the manuscript. (<a href="https://www.github.com">Download LaTeX and Word templates</a>).</li>
         <li>Images which explain how your visualizations help answer the questions. The images should be appended to the 2-page document (your whole PDF document should be more than 2 pages). The PDF document should be no bigger than 50 MB in size.</li>
         <li>An MPEG, AVI, or Quicktime video (maximum 10 minutes) showing the system, methods, or processes in action. This will be most helpful for demonstrating the effectiveness of your approach.</li>
+        <li>We accept both individual and group submissions. Please include all author names during submission.</li>
     </ul>
 
     <h3>To Submit:</h3>
