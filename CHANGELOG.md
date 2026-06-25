@@ -11,7 +11,7 @@ Todos los cambios notables y modificaciones del entorno de desarrollo para el pr
 * Creación de un Fork del proyecto en la cuenta personal de GitHub para gestionar el desarrollo del equipo.
 * Configuración de permisos de colaboración en el Fork para permitir el acceso y la integración de commits por parte de los miembros del grupo.
 * Inicialización del entorno virtual local (`.venv`) en la raíz del proyecto mediante el comando `uv init`.
-* Instalación y traducción de las dependencias base especificadas en el archivo `environment.yml` del equipo docente usando comandos nativos de `uv`: `jupyterlab`, `matplotlib`, `xarray`, `netcdf4`, `xmltodict`, `colorcet`, `boto3`, `basemap`, `bokeh`, `panel` e `intake`.
+* Instalación y traducción de las dependencias base especificadas en el archivo `environment.yml` del equipo docente usando comandos nativos de `uv`: `jupyterlab`, `matplotlib`, `xarray`, `netcdf4`, `xmltodict`, `colorcet`, `boto3`, `basemap`, `bokeh`, `panel`, `intake`, `intake-nexgddp`, `requests` y `aiohttp`.
 * Adición de las librerías especializadas para el streaming remoto de datos multidimensionales y cartografía: `OpenVisus`, `openvisuspy` y `cartopy`.
 
 ### Cambios
