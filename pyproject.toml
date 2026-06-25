@@ -1,0 +1,22 @@
+[project]
+name = "sciviscontest2026"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "basemap>=2.0.0",
+    "bokeh>=3.9.1",
+    "boto3>=1.43.36",
+    "cartopy>=0.25.0",
+    "colorcet>=3.2.1",
+    "intake>=2.0.9",
+    "jupyterlab>=4.6.0",
+    "matplotlib>=3.10.9",
+    "netcdf4>=1.7.4",
+    "openvisus>=2.2.149",
+    "openvisuspy>=1.0.71",
+    "panel>=1.9.3",
+    "xarray>=2026.4.0",
+    "xmltodict>=1.0.4",
+]
