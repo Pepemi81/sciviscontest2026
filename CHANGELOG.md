@@ -27,3 +27,22 @@ Todos los cambios notables y modificaciones del entorno de desarrollo para el pr
 * Establecer la estructura de comunicación entre los cuadernos de análisis y los scripts de renderizado 3D en VTK.
 
 ---
+
+## [28/06/2026] - Funcionalidad inicial del task 0 (Jose Miguel Molina y Rodrigo Jiménez)
+
+### Añadido
+* Creación del script `task0_data.py` para dejar lista la conexión con el servidor y la gestión de la temperatura y precipitación.
+* Puestos comentarios (docstrings) en español en todas las funciones para que salga la ayuda con el ratón al escribir el código.
+* Creación del script `visualize_by_date.py` como ejemplo para pedir y ver los datos usando una fecha.
+* Creación del script `visualize_by_timestep.py` como ejemplo para pedir y ver los datos usando el número de timestep.
+
+### Cambios
+* Corregido el año de inicio del dataset al 1 de enero de 1950 tras comprobar los límites reales del servidor.
+* Arreglado el problema de los años bisiestos del servidor cambiando el sistema por un contador de días limpio (de 0 a 22644).
+* Añadido el uso de `timedelta` para poder sacar la fecha real a partir de un timestep y usarla en los títulos de las gráficas.
+* Modificada la función `get_data_by_timestep` para que traduzca el número del slider de los de visualización al índice raro que pide el servidor.
+
+### Tests
+* Comprobado que los scripts de ejemplo funcionan bien importando el script de datos y que no hace falta usar OpenVisus en ellos.
+
+---
