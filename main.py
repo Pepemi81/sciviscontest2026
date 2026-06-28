@@ -1,6 +1,7 @@
 import numpy as np
 import OpenVisus as ov
-from datetime import datetime
+#from datetime import datetime
+from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
@@ -45,6 +46,17 @@ print(f'Total Timesteps: {len(db.getTimesteps())}')
 data=db.read(time=timestep_index,quality=0,field=field)
 data.shape
 
+#Prueba: obtener lista
+
+def get_all_dates(start_date="1945-01-01", num_timesteps=55115):
+    start = datetime.strptime(start_date, "%Y-%m-%d")
+
+    dates = [
+        (start + timedelta(days=i)).strftime("%Y-%m-%d")
+        for i in range(num_timesteps)
+    ]
+
+    return dates
 
 #visualizacion
 
@@ -77,6 +89,16 @@ def test_visualization():
     # Show the plot
     plt.show()
 
+dates = get_all_dates()
+
+print(dates[0])
+# 1945-01-01
+
+print(dates[100])
+# 1945-04-11
+
+print(dates[-1])
+# última fecha del dataset
 
 test_visualization()
 
