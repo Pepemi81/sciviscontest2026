@@ -46,3 +46,10 @@ Todos los cambios notables y modificaciones del entorno de desarrollo para el pr
 * Comprobado que los scripts de ejemplo funcionan bien importando el script de datos y que no hace falta usar OpenVisus en ellos.
 
 ---
+
+## [04/07/2026] - Reorganización de archivos (Jose Miguel Molina)
+
+### Cambios
+* Agrupados los scripts: `task0_data.py`, `visualize_by_date.py` y `visualize_by_timestep.py` en la carpeta `tasks\task0`.
+
+---

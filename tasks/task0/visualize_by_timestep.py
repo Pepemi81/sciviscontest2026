@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import task0_data
+import Task0.task0_data as task0_data
 
 target_variable = "pr" 
 target_timestep = 12000

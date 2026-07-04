@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import task0_data
+import Task0.task0_data as task0_data
 
 target_variable = "tas" 
 target_date = "1950-01-10"
