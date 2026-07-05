@@ -28,7 +28,7 @@ Todos los cambios notables y modificaciones del entorno de desarrollo para el pr
 
 ---
 
-## [28/06/2026] - Funcionalidad inicial del task 0 (Jose Miguel Molina y Rodrigo Jiménez)
+## [28/06/2026] - Funcionalidad inicial del task 0 (Jose Miguel Molina y Rodrigo Jiménez Vielba)
 
 ### Añadido
 * Creación del script `task0_data.py` para dejar lista la conexión con el servidor y la gestión de la temperatura y precipitación.
@@ -53,3 +53,21 @@ Todos los cambios notables y modificaciones del entorno de desarrollo para el pr
 * Agrupados los scripts: `task0_data.py`, `visualize_by_date.py` y `visualize_by_timestep.py` en la carpeta `tasks\task0`.
 
 ---
+
+## [05/07/2026] - Funcionalidad inicial del task 1 (Hilario Javier del Valle Escolar, Rodrigo Jiménez Vielba y Jose Miguel Molina)
+
+### Añadido
+* Creación del script `task1_data.py` para gestionar la conexión con los datos del experimento DYAMOND GEOS mediante OpenVisus.
+* Implementada la función `get_data_by_timestep` para descargar volúmenes 3D de las variables atmosféricas (`u`, `v`, etc.) indicando la face del cubed-sphere, el timestep y el intervalo vertical (`z`).
+* Implementada la función `get_date_by_timestep` para convertir un timestep del experimento en su fecha y hora correspondientes.
+* Creación del script `visualize_by_timestep.py` como ejemplo de descarga y visualización de una sección del volumen mediante Matplotlib.
+
+### Cambios
+* Definidos los límites válidos del experimento (`MAX_TIMESTEP`, `MAX_FACES` y niveles `z`) para facilitar la validación de parámetros.
+* Añadidas comprobaciones de rango para los parámetros `timestep`, `face` e intervalo `z`, mostrando mensajes de advertencia cuando los valores introducidos no son válidos.
+* Automatizada la construcción de la URL del dataset a partir de la variable y la face solicitadas, evitando mantener rutas independientes para cada conjunto de datos.
+
+### Tests
+* Verificada la descarga correcta de datos tridimensionales desde distintas faces del modelo GEOS utilizando OpenVisus.
+* Comprobada la conversión de timesteps a fecha y hora mediante la función `get_date_by_timestep`.
+* Validado el script de ejemplo mostrando correctamente un corte del volumen descargado mediante `imshow`.
