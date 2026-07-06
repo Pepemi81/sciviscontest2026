@@ -12,9 +12,6 @@ scenario = "historical"
 MIN_DATE = "1950-01-01"
 MAX_DATE = "2100-12-31"
 
-# Dias totales reales entre 1950-01-01 y 2011-12-31
-MAX_TIMESTEP = 22644
-
 try:
     db = ov.LoadDataset(main_url)
 except Exception:
@@ -65,7 +62,7 @@ def get_timestep(date_str):
         if date_obj.year % 100 != 0 or date_obj.year % 400 == 0:
             is_leap_year = True
             
-    if is_leap_year == True:
+    if is_leap_year:
         total_days_in_year = 366
     else:
         total_days_in_year = 365
@@ -145,11 +142,9 @@ def get_data_by_timestep(variable, timestep, ssp):
     Returns:
         numpy.ndarray: La matriz 2D que contiene los datos climáticos solicitados.
     """
-    if timestep < 0 or timestep > MAX_TIMESTEP:
-        print(f"\n[WARNING] Timestep {timestep} is out of bounds.")
-        print(f"[WARNING] Valid range: 0 to {MAX_TIMESTEP}")
         
     date = get_date_by_timestep(timestep)
+    print(date)
     scenario = select_ssp(date, ssp)
     field_name = f"{variable}_day_{model}_{scenario}_r1i1p1f1_gn"
     data = db.read(time=timestep, quality=0, field=field_name)

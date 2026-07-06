@@ -4,8 +4,6 @@ import task0_data
 target_variable = "tas" 
 target_date = "2017-06-30"
 target_scenario = "ssp126"
-
-print(task0_data.get_timestep(target_date))
        
 print(f"Downloading data for '{target_variable}' on date {target_date} in scenario {target_scenario}...")
 
