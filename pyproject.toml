@@ -20,6 +20,7 @@ dependencies = [
     "openvisuspy>=1.0.71",
     "panel>=1.9.3",
     "requests>=2.34.2",
+    "vtk==9.6.2",
     "xarray>=2026.4.0",
     "xmltodict>=1.0.4",
 ]
