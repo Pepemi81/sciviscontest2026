@@ -56,18 +56,8 @@ def get_timestep(date_str):
     start_of_year = datetime(date_obj.year, 1, 1)
     
     day_of_year = (date_obj - start_of_year).days
-    
-    is_leap_year = False
-    if date_obj.year % 4 == 0:
-        if date_obj.year % 100 != 0 or date_obj.year % 400 == 0:
-            is_leap_year = True
             
-    if is_leap_year:
-        total_days_in_year = 366
-    else:
-        total_days_in_year = 365
-        
-    timestep_index = (date_obj.year * total_days_in_year) + day_of_year
+    timestep_index = (date_obj.year * 365) + day_of_year
     
     return int(timestep_index)
 
@@ -84,14 +74,11 @@ def get_date_by_timestep(timestep):
     """    
     
     for year in range(1950, 2101):
-        is_leap_year = (year % 4 == 0 and (year % 100 != 0 or year % 400 == 0))
-        total_days_in_year = 366 if is_leap_year else 365
+        day_of_year = timestep - (year * 365)
         
-        day_of_year = timestep - (year * total_days_in_year)
-        
-        if 0 <= day_of_year < total_days_in_year:
+        if 0 <= day_of_year < 365:
             start_of_year = datetime(year, 1, 1)
-            target_date = start_of_year + timedelta(days=day_of_year)
+            target_date = start_of_year + timedelta(days=365)
             return target_date.strftime('%Y-%m-%d')
             
     return "fuera de rango"
