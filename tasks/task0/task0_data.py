@@ -10,7 +10,10 @@ model = "ACCESS-CM2"
 scenario = "historical"
 
 MIN_DATE = "1950-01-01"
-MAX_DATE = "2100-12-31"
+MAX_DATE = "2011-12-31"
+
+# Dias totales reales entre 1950-01-01 y 2011-12-31
+MAX_TIMESTEP = 22644
 
 try:
     db = ov.LoadDataset(main_url)
