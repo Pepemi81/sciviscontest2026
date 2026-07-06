@@ -71,3 +71,31 @@ Todos los cambios notables y modificaciones del entorno de desarrollo para el pr
 * Verificada la descarga correcta de datos tridimensionales desde distintas faces del modelo GEOS utilizando OpenVisus.
 * Comprobada la conversión de timesteps a fecha y hora mediante la función `get_date_by_timestep`.
 * Validado el script de ejemplo mostrando correctamente un corte del volumen descargado mediante `imshow`.
+
+## [06/07/2026]
+# Resumen de Cambios: Tarea 0 (Iago Otero y Alberto Garcia)
+
+Este documento detalla las modificaciones y mejoras finales realizadas sobre los tres scripts principales que conforman la Tarea 0 para la descarga y visualización de datos climáticos desde OpenVisus.
+
+## 1. `task0_data.py` (Módulo Principal de Datos)
+Este archivo sufrió la mayor reestructuración para hacer la descarga de datos más robusta, modular y fácil de utilizar.
+
+* **Creación de la función `select_ssp(date_str, ssp)`:** * Se extrajo la lógica condicional del escenario a esta nueva función.
+    * Fuerza el escenario `"historical"` automáticamente si la fecha solicitada es igual o anterior al **31 de diciembre de 2011**. 
+    * Si la fecha es posterior, respeta el escenario especificado por el usuario.
+* **Actualización de `get_date_by_timestep(ov_timestep)`:** * Se reescribió completamente la lógica. En lugar de tratar el `timestep` como un índice lineal de días desde 1950, ahora acepta el **índice absoluto de OpenVisus** 
+    * Utiliza un algoritmo de ingeniería inversa iterando sobre los años y los días del año (no se contemplan años bisiestos debido a la estructura de datos de OpenVisus) para deducir a qué fecha exacta corresponde un índice de OpenVisus.
+* **Refactorización de `get_data_by_timestep(variable, timestep, ssp)`:** * Se usa la función `get_date_by_timestep` para obtener la fecha correspondiente y poder usarla en la función `select_ssp`. Y utiliza el `timestep` para leer los datos directamente.
+
+## 2. `visualize_by_date.py` (Ejemplo por Fecha)
+Las modificaciones en este script de ejemplo fueron ajustes menores de compatibilidad con el nuevo módulo de datos:
+
+* Se ha creado variable de tipo *string* `target_scenario` para alimentar correctamente a `task0_data.get_data_by_date`.
+* El código mantiene su estructura limpia, llamando a la función por fecha y mostrando el mapa de calor con `matplotlib`.
+
+## 3. `visualize_by_timestep.py` (Visualización por Timestep)
+Este script se ajustó para reflejar la nueva lógica de los timesteps absolutos requeridos por el servidor.
+
+* **Uso de Timesteps Absolutos:** La variable `target_timestep` ahora se configura con índices reales de OpenVisus, en lugar de utilizar un rango lineal.
+* **Ajuste de Escenario:** Al igual que en el script de fechas, se ha creado `target_scenario`.
+* **Mejora en el Título del Gráfico:** Aprovecha la nueva capacidad de la función `get_date_by_timestep` para mostrar tanto el índice numérico (`target_timestep`) como la fecha real deducida (`real_date`) en el título del gráfico, permitiendo al usuario saber exactamente qué día está observando.
