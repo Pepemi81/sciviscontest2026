@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import task0_data
 
 target_variable = "tas" 
-target_date = "2017-06-30"
+target_date = "2004-02-28"
 target_scenario = "ssp126"
        
 print(f"Downloading data for '{target_variable}' on date {target_date} in scenario {target_scenario}...")

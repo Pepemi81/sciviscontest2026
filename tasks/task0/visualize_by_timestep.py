@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import task0_data
 
 target_variable = "pr" 
-target_timestep = 736385
+target_timestep = 732059
 target_scenario = "ssp126"
 
 print(f"Downloading data for '{target_variable}' at timestep {target_timestep} in scenario {target_scenario}...")
