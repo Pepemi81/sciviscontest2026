@@ -121,7 +121,7 @@ def get_data_by_date(variable, date_str, ssp):
 
     scenario = select_ssp(date_str, ssp)
     timestep = get_timestep(date_str)
-    print(timestep)
+
     field_name = f"{variable}_day_{model}_{scenario}_r1i1p1f1_gn"
     data = db.read(time=timestep, quality=0, field=field_name)
     
