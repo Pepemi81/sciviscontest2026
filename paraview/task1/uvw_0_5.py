@@ -9,7 +9,7 @@ from paraview.simple import *
 paraview.simple._DisableFirstRenderCameraReset()
 
 # create a new 'PVD Reader'
-a0_timepvd = PVDReader(registrationName='0_time.pvd', FileName='C:\\Master\\VIDA\\Final\\sciviscontest2026\\tasks\\task1\\0_time.pvd')
+a0_timepvd = PVDReader(registrationName='0_time.pvd', FileName='"C:\\Master\\VIDA\\Final\\sciviscontest2026\\tasks\\task1\\0_time.pvd"')
 a0_timepvd.PointArrays = ['u', 'v', 'w']
 
 # get animation scene
@@ -162,8 +162,12 @@ SetActiveSource(calculator1)
 # set active source
 SetActiveSource(glyph1)
 
-# set scalar coloring
-ColorBy(glyph1Display, ('POINTS', 'Result', 'Magnitude'))
+# ---------------------------------------------------------------
+# FIX: color map SEPARADO para este glyph (separate=True), para
+# que no comparta rango de colores con los demÃ¡s glyphs (glyph2,
+# glyph3, glyph4), que tienen otro rango de valores de 'Result'.
+# ---------------------------------------------------------------
+ColorBy(glyph1Display, ('POINTS', 'Result', 'Magnitude'), separate=True)
 
 # Hide the scalar bar for this color map if no visible data is colored by it.
 HideScalarBarIfNotNeeded(uLUT, renderView1)
@@ -174,23 +178,20 @@ glyph1Display.RescaleTransferFunctionToDataRange(True, False)
 # show color bar/color legend
 glyph1Display.SetScalarBarVisibility(renderView1, True)
 
-# get color transfer function/color map for 'Result'
-resultLUT = GetColorTransferFunction('Result')
+# get color transfer function/color map for 'Result' PROPIO de glyph1
+resultLUT1 = GetColorTransferFunction('Result', glyph1Display, separate=True)
 
-# get opacity transfer function/opacity map for 'Result'
-resultPWF = GetOpacityTransferFunction('Result')
+# get opacity transfer function/opacity map for 'Result' PROPIO de glyph1
+resultPWF1 = GetOpacityTransferFunction('Result', glyph1Display, separate=True)
 
-# get 2D transfer function for 'Result'
-resultTF2D = GetTransferFunction2D('Result')
-
-# Apply a preset using its name. Note this may not work as expected when presets have duplicate names.
-resultLUT.ApplyPreset('Rainbow Desaturated', True)
+# Apply a preset using its name.
+resultLUT1.ApplyPreset('Rainbow Desaturated', True)
 
 # hide data in view
 Hide(calculator1, renderView1)
 
 # create a new 'PVD Reader'
-a1_timepvd = PVDReader(registrationName='1_time.pvd', FileName='C:\\Master\\VIDA\\Final\\sciviscontest2026\\tasks\\task1\\1_time.pvd')
+a1_timepvd = PVDReader(registrationName='1_time.pvd', FileName='C:\\Master\\VIDA\\Final\\sciviscontest2026\\task1\\1_time.pvd')
 a1_timepvd.PointArrays = ['u', 'v', 'w']
 
 # set active source
@@ -234,7 +235,7 @@ renderView1.Update()
 
 # create a new 'Calculator'
 calculator2 = Calculator(registrationName='Calculator2', Input=a1_timepvd)
-calculator2.Function = ''
+calculator2.Function = '(u*iHat + v*jHat + w*kHat)'
 
 # hide data in view
 Hide(a1_timepvd, renderView1)
@@ -243,16 +244,13 @@ Hide(a1_timepvd, renderView1)
 glyph2 = Glyph(registrationName='Glyph2', Input=calculator2,
     GlyphType='Arrow')
 glyph2.Set(
-    OrientationArray=['POINTS', 'Result'],
-    ScaleArray=['POINTS', 'u'],
-    ScaleFactor=65.01832580566406,
+    OrientationArray=['POINTS','Result'],
+    ScaleArray=['POINTS','Result'],
+    ScaleFactor=0.7189310386251728,
 )
 
-# get display properties
-glyph2Display = GetRepresentation(glyph2, view=renderView1)
-
-# rescale color and/or opacity maps used to include current data range
-glyph2Display.RescaleTransferFunctionToDataRange(True, False)
+# show data in view
+glyph2Display = Show(glyph2, renderView1, 'GeometryRepresentation')
 
 # hide data in view
 Hide(calculator2, renderView1)
@@ -263,8 +261,10 @@ SetActiveSource(glyph1)
 # set active source
 SetActiveSource(glyph2)
 
-# set scalar coloring
-ColorBy(glyph2Display, ('POINTS', 'Result', 'Magnitude'))
+# ---------------------------------------------------------------
+# FIX: color map SEPARADO para glyph2
+# ---------------------------------------------------------------
+ColorBy(glyph2Display, ('POINTS', 'Result', 'Magnitude'), separate=True)
 
 # Hide the scalar bar for this color map if no visible data is colored by it.
 HideScalarBarIfNotNeeded(uLUT, renderView1)
@@ -273,10 +273,17 @@ HideScalarBarIfNotNeeded(uLUT, renderView1)
 glyph2Display.RescaleTransferFunctionToDataRange(True, False)
 
 # show color bar/color legend
-glyph2Display.SetScalarBarVisibility(renderView1, True)
+glyph2Display.SetScalarBarVisibility(renderView1, False)
+
+# get color transfer function/color map for 'Result' PROPIO de glyph2
+resultLUT2 = GetColorTransferFunction('Result', glyph2Display, separate=True)
+resultPWF2 = GetOpacityTransferFunction('Result', glyph2Display, separate=True)
+
+# Apply a preset using its name.
+resultLUT2.ApplyPreset('Rainbow Desaturated', True)
 
 # create a new 'PVD Reader'
-a2_timepvd = PVDReader(registrationName='2_time.pvd', FileName='C:\\Master\\VIDA\\Final\\sciviscontest2026\\tasks\\task1\\2_time.pvd')
+a2_timepvd = PVDReader(registrationName='2_time.pvd', FileName='C:\\Master\\VIDA\\Final\\sciviscontest2026\\task1\\2_time.pvd')
 a2_timepvd.PointArrays = ['u', 'v', 'w']
 
 # show data in view
@@ -311,7 +318,7 @@ renderView1.Update()
 
 # create a new 'Calculator'
 calculator3 = Calculator(registrationName='Calculator3', Input=a2_timepvd)
-calculator3.Function = ''
+calculator3.Function = '(u*iHat + v*jHat + w*kHat)'
 
 # hide data in view
 Hide(a2_timepvd, renderView1)
@@ -320,22 +327,21 @@ Hide(a2_timepvd, renderView1)
 glyph3 = Glyph(registrationName='Glyph3', Input=calculator3,
     GlyphType='Arrow')
 glyph3.Set(
-    OrientationArray=['POINTS', 'Result'],
-    ScaleArray=['POINTS', 'u'],
-    ScaleFactor=65.01832580566406,
+    OrientationArray=['POINTS','Result'],
+    ScaleArray=['POINTS','Result'],
+    ScaleFactor=0.7189310386251728,
 )
 
-# get display properties
-glyph3Display = GetRepresentation(glyph3, view=renderView1)
-
-# rescale color and/or opacity maps used to include current data range
-glyph3Display.RescaleTransferFunctionToDataRange(True, False)
+# show data in view
+glyph3Display = Show(glyph3, renderView1, 'GeometryRepresentation')
 
 # hide data in view
 Hide(calculator3, renderView1)
 
-# set scalar coloring
-ColorBy(glyph3Display, ('POINTS', 'Result', 'Magnitude'))
+# ---------------------------------------------------------------
+# FIX: color map SEPARADO para glyph3
+# ---------------------------------------------------------------
+ColorBy(glyph3Display, ('POINTS', 'Result', 'Magnitude'), separate=True)
 
 # Hide the scalar bar for this color map if no visible data is colored by it.
 HideScalarBarIfNotNeeded(uLUT, renderView1)
@@ -344,10 +350,17 @@ HideScalarBarIfNotNeeded(uLUT, renderView1)
 glyph3Display.RescaleTransferFunctionToDataRange(True, False)
 
 # show color bar/color legend
-glyph3Display.SetScalarBarVisibility(renderView1, True)
+glyph3Display.SetScalarBarVisibility(renderView1, False)
+
+# get color transfer function/color map for 'Result' PROPIO de glyph3
+resultLUT3 = GetColorTransferFunction('Result', glyph3Display, separate=True)
+resultPWF3 = GetOpacityTransferFunction('Result', glyph3Display, separate=True)
+
+# Apply a preset using its name.
+resultLUT3.ApplyPreset('Rainbow Desaturated', True)
 
 # create a new 'PVD Reader'
-a3_timepvd = PVDReader(registrationName='3_time.pvd', FileName='C:\\Master\\VIDA\\Final\\sciviscontest2026\\tasks\\task1\\3_time.pvd')
+a3_timepvd = PVDReader(registrationName='3_time.pvd', FileName='C:\\Master\\VIDA\\Final\\sciviscontest2026\\task1\\3_time.pvd')
 a3_timepvd.PointArrays = ['u', 'v', 'w']
 
 # show data in view
@@ -385,7 +398,7 @@ Hide(a3_timepvd, renderView1)
 
 # create a new 'Calculator'
 calculator4 = Calculator(registrationName='Calculator4', Input=a3_timepvd)
-calculator4.Function = ''
+calculator4.Function = '(u*iHat + v*jHat + w*kHat)'
 
 # hide data in view
 Hide(a3_timepvd, renderView1)
@@ -394,22 +407,21 @@ Hide(a3_timepvd, renderView1)
 glyph4 = Glyph(registrationName='Glyph4', Input=calculator4,
     GlyphType='Arrow')
 glyph4.Set(
-    OrientationArray=['POINTS', 'Result'],
-    ScaleArray=['POINTS', 'u'],
-    ScaleFactor=65.01832580566406,
+    OrientationArray=['POINTS','Result'],
+    ScaleArray=['POINTS','Result'],
+    ScaleFactor=0.7189310386251728,
 )
 
-# get display properties
-glyph4Display = GetRepresentation(glyph4, view=renderView1)
-
-# rescale color and/or opacity maps used to include current data range
-glyph4Display.RescaleTransferFunctionToDataRange(True, False)
+# show data in view
+glyph4Display = Show(glyph4, renderView1, 'GeometryRepresentation')
 
 # hide data in view
 Hide(calculator4, renderView1)
 
-# set scalar coloring
-ColorBy(glyph4Display, ('POINTS', 'Result', 'Magnitude'))
+# ---------------------------------------------------------------
+# FIX: color map SEPARADO para glyph4
+# ---------------------------------------------------------------
+ColorBy(glyph4Display, ('POINTS', 'Result', 'Magnitude'), separate=True)
 
 # Hide the scalar bar for this color map if no visible data is colored by it.
 HideScalarBarIfNotNeeded(uLUT, renderView1)
@@ -418,13 +430,20 @@ HideScalarBarIfNotNeeded(uLUT, renderView1)
 glyph4Display.RescaleTransferFunctionToDataRange(True, False)
 
 # show color bar/color legend
-glyph4Display.SetScalarBarVisibility(renderView1, True)
+glyph4Display.SetScalarBarVisibility(renderView1, False)
+
+# get color transfer function/color map for 'Result' PROPIO de glyph4
+resultLUT4 = GetColorTransferFunction('Result', glyph4Display, separate=True)
+resultPWF4 = GetOpacityTransferFunction('Result', glyph4Display, separate=True)
+
+# Apply a preset using its name.
+resultLUT4.ApplyPreset('Rainbow Desaturated', True)
 
 # set active source
 SetActiveSource(a3_timepvd)
 
 # create a new 'PVD Reader'
-hurs_yearspvd = PVDReader(registrationName='hurs_years.pvd', FileName='C:\\Master\\VIDA\\Final\\sciviscontest2026\\tasks\\task0\\hurs_years.pvd')
+hurs_yearspvd = PVDReader(registrationName='hurs_years.pvd', FileName='C:\Master\\VIDA\\Final\\sciviscontest2026\\task0\\hurs_years.pvd')
 hurs_yearspvd.PointArrays = ['hurs']
 
 # show data in view
@@ -618,3 +637,8 @@ renderView1.Set(
 ## Please refer to the documentation of paraview.simple
 ## https://www.paraview.org/paraview-docs/nightly/python/
 ##--------------------------------------------
+
+
+# import ptc
+# web_app = ptc.Viewer(from_state=True)
+# web_app.start(open_browser=False)
