@@ -7,6 +7,7 @@
 **/.ipynb_checkpoints
 **/.venv
 /.idea
+**/__pycache__
 /tasks/task1/vtss/0_00000.vts
 /tasks/task1/vtss/0_00001.vts
 /tasks/task1/vtss/0_00002.vts
